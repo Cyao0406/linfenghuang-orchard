@@ -9,14 +9,14 @@
 **頁面結構（`index.html` 內的 section，依序）：**
 1. `#top` Hero — 主視覺大圖 + 標語
 2. `#about` 關於我們 — 三代果園故事
-3. `#products` 產品介紹 — 龍眼（大金剛/水貢兩品種）、龍眼乾、荔枝、香蕉
-4. `#quality` 品質保證 — 產銷履歷驗證、生產追溯、培訓精進三個賣點
-5. `#contact` 聯絡我們 — FB / 電話 / LINE
+3. `#quality` 品質保證 — 產銷履歷驗證、生產追溯、培訓精進、嘉義在地直送，四張卡片（`.quality-grid`，4欄→手機2欄）
+4. `#products` 產品介紹 — 「當季鮮果」＋「加工品」兩組。龍眼（大金剛/水貢潤蒂仔/早生/十月龍眼）、荔枝（糯米糍/黑葉/桂味/玫瑰紅）用大卡片 `.product-card`（有品種列表+多張圖）；其餘商品（香蕉、橘子、砂糖橘、黃金果、葡萄柚、人心果、仙桃、酪梨、桑葚、紅柚、龍眼乾、桑葚汁）用小卡片 `.product-simple-card`（`.product-simple-grid` 容器，僅單圖或佔位、無品種細分）
+5. `#contact` 聯絡我們 — Facebook 社團連結（可點擊）／電話／LINE／產銷履歷 QR 徽章圖，四欄 `.contact-grid`
 
 **目前內容缺口（改動前先確認是否仍未補齊）：**
-- `index.html` 第 148 行有 `<!-- TODO: 補上粉專連結 -->`，Facebook 連結還沒填
-- 電話、LINE 聯絡方式目前顯示「聯絡方式更新中，敬請期待」（`.contact-placeholder`）
-- 荔枝、香蕉目前用 emoji + 「照片準備中」佔位（`.product-card-placeholder` / `.placeholder-media`），還沒有實拍照片
+- 電話、LINE 聯絡方式目前顯示「聯絡方式更新中，敬請期待」（`.contact-placeholder`），尚未取得使用者確認的真實聯絡方式，**不要自行填入猜測的號碼或連結**
+- Facebook 已填：`https://www.facebook.com/groups/925737937782079/`（注意這是 FB **社團**不是粉專，文案用詞需保持一致）
+- 以下 9 項商品完全沒有素材照片，用 `.placeholder-media` + emoji 佔位：橘子、砂糖橘、黃金果、葡萄柚、人心果、仙桃、酪梨、桑葚、紅柚。新增照片時直接把對應 emoji 卡片的 `.placeholder-media` 換成 `<img>` 即可，不用改版面結構
 
 **部署：**
 - GitHub repo：https://github.com/Cyao0406/linfenghuang-orchard
@@ -30,7 +30,8 @@
 index.html    單頁全部內容（所有 section 都在同一份檔案）
 css/style.css 所有樣式，design tokens 定義在最上方 :root
 js/script.js  只做兩件事：footer 年份自動更新、手機版漢堡選單開關
-images/       產品/情境照片（jpg），目前檔名皆為英文語意化命名（如 longan-cluster.jpg）
+images/       依商品分中文子資料夾（images/龍眼/、images/荔枝/、images/香蕉/、images/龍眼乾/、images/contact/），
+              資料夾內檔名為英文語意化命名（如 images/龍眼/cluster.jpg）
 ```
 
 `js/script.js` 很短，不要為了小改動加框架或建置流程，維持純手刻的風格。
@@ -61,9 +62,9 @@ images/       產品/情境照片（jpg），目前檔名皆為英文語意化�
 **RWD：** 單一斷點 `860px`（手機版漢堡選單在此切換），行動版 section padding 從 96px 收成 64px。
 
 **內容佔位符慣例：** 素材還沒到位時不要留空或刪掉整塊，照下面模式處理：
-- 圖片未到位 → `.placeholder-media` + 對應 emoji（🍈荔枝／🍌香蕉）+「照片準備中」文字
+- 圖片未到位 → `.product-simple-card` 內用 `.placeholder-media` + 對應 emoji（見 index.html 內各商品卡片），不加「照片準備中」文字（emoji本身已足夠表意，維持卡片精簡）
 - 聯絡資訊未到位 → `.contact-placeholder` class +「更新中，敬請期待」
-- 需要之後手動補的連結 → HTML 註解 `<!-- TODO: ... -->` 標記在對應位置，方便搜尋
+- **絕對不要**為了填滿版面自行編造電話、LINE、統編、品種口感描述等未經使用者確認的資訊——寧可留佔位，也不要塞假資料
 
 ## 常用指令
 
